@@ -1,4 +1,4 @@
-const descriptionMd = `Nuxt Typescript Template`
+const descriptionMd = `All in one Social Media Post Creator`
 
 const description = descriptionMd
   .replace(/\[([^\]]+)\](\([^)]+\)|\[[^\]]+\])/g, '$1')
@@ -7,14 +7,14 @@ const description = descriptionMd
   .trim()
 
 module.exports = {
-  title: 'Seongland',
+  title: 'Social Poster🚀',
   descriptionMd,
   description,
   url: 'https://www.seongland.com',
-  twitterUsername: '@SeonglaeC',
-  email: 'seongle3737@gmail.com',
+  twitterUsername: '@rohanfizz',
+  email: 'rohans.ping@gmail.com',
   socials: {
-    GitHub: 'https://github.com/seongland/seongland-ing',
+    GitHub: 'https://github.com/Rohanfizz/',
     Twitter: 'https://twitter.com/SeonglaeC',
   },
   bgColor: '#1A202C',

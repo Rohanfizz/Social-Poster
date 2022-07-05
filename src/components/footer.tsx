@@ -6,12 +6,12 @@ export const Footer: React.FC = () => {
   const socials = useSocials()
 
   return (
-    <Stack as="footer" pb={16} pt={8} spacing={8}>
+    <Stack as="footer" pb={1} pt={8} spacing={5}>
       <Box px={8}>
         <Divider />
       </Box>
       <Flex alignItems="flex-start" flexDir="row" justifyContent="space-between" px={8}>
-        <Stack spacing={8}>
+        <Stack spacing={0}>
           <HStack spacing={6}>
             {socials.map(([href, SocialIcon]) => (
               <Link href={href} isExternal key={href}>
