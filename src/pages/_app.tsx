@@ -14,12 +14,26 @@ import { theme } from '@/theme'
 import siteConfig from '~/site-config'
 
 import type { AppProps } from '@/types/next'
+import { Auth0Provider } from '@auth0/auth0-react'
+import { RecoilRoot } from 'recoil'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const MobileDrawer = dynamic(() => import('@/components/mobile-drawer').then(C => C.MobileDrawer))
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 5,
+      retry: false,
+      refetchOnWindowFocus: false,
+      staleTime: 0,
+    },
+  },
+})
 
 function App(props: AppProps) {
   const { Component, pageProps, router } = props
@@ -62,24 +76,33 @@ function App(props: AppProps) {
         url={siteConfig.url}
         sameAs={Object.values(siteConfig.socials)}
       />
-
-      <ChakraProvider resetCSS theme={theme}>
-        {Component.disableLayout ? (
-          <Component {...pageProps} />
-        ) : (
-          <>
-            <Stack justify="space-between" minH="100vh" spacing={0}>
-              <Navbar />
-              <Box as="main">
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <Auth0Provider
+            domain="rohanfizz.us.auth0.com"
+            clientId="B837TzRuBdomd4ULNa4iiNLZ7Pp8nOQj"
+            redirectUri={'http://localhost:3000/'}
+          >
+            <ChakraProvider resetCSS theme={theme}>
+              {Component.disableLayout ? (
                 <Component {...pageProps} />
-              </Box>
-              <Footer />
-            </Stack>
+              ) : (
+                <>
+                  <Stack justify="space-between" minH="100vh" spacing={0}>
+                    <Navbar />
+                    <Box as="main">
+                      <Component {...pageProps} />
+                    </Box>
+                    <Footer />
+                  </Stack>
 
-            <MobileDrawer />
-          </>
-        )}
-      </ChakraProvider>
+                  <MobileDrawer />
+                </>
+              )}
+            </ChakraProvider>
+          </Auth0Provider>
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   )
 }

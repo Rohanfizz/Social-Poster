@@ -1,3 +1,4 @@
+import usePostContent from '@/hooks/usePostContent'
 import {
   Avatar,
   Box,
@@ -29,6 +30,13 @@ import { FaUser } from 'react-icons/fa'
 import SocialButtons from './SocialButtons'
 
 const PostForm = () => {
+
+  const {setPostingTweet} = usePostContent();
+
+  const postContentHandler = ()=>{
+    setPostingTweet(true);
+  }
+
   return (
     <Box
       bg="#edf3f8"
@@ -38,6 +46,7 @@ const PostForm = () => {
     //   p={1}
       h={'100%'}
       w="100%"
+      boxShadow={"lg"}
     >
       <Box>
         <SimpleGrid
@@ -204,7 +213,7 @@ const PostForm = () => {
                       >
                         <path
                           d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                          strokeWidth="2"
+                          strokeWidth="2" 
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
@@ -260,21 +269,26 @@ const PostForm = () => {
                   sm: 6,
                 }}
                 py={3}
-                bg="gray.50"
+                bg="gray.200"
                 _dark={{
-                  bg: '#121212',
+                  bg: 'blackAlpha.500',
                 }}
                 textAlign="right"
               >
                 <Button
                   type="submit"
-                  colorScheme="brand"
+                  colorScheme="teal"
+                  _dark={{
+                    colorScheme: 'pink',
+                  }}
                   _focus={{
                     shadow: '',
                   }}
+                  onClick={postContentHandler}
+                  disabled={false}
                   fontWeight="md"
                 >
-                  Save
+                  Post
                 </Button>
               </Box>
             </FormControl>

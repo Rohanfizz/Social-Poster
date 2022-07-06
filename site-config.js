@@ -15,7 +15,7 @@ module.exports = {
   email: 'rohans.ping@gmail.com',
   socials: {
     GitHub: 'https://github.com/Rohanfizz/',
-    Twitter: 'https://twitter.com/SeonglaeC',
+    Linkedin: 'https://www.linkedin.com/in/rohanfizz/',
   },
   bgColor: '#1A202C',
   themeColor: '#46c0aE',
